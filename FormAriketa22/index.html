@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Formularioa</title>
+        <link rel="stylesheet" href="ariketa.css">
+        <script type="text/javascript" src="Formularioa.js"></script>
+    </head>
+    <body>
+        <div class="main">
+            <h2>DAW Klasea</h2>
+            <h3>Formularioak eta JavaScript</h3>
+
+            <div class="block">
+                <div class=" border"><!--Formulario-->
+                    <form id="form1">
+                        <!--Genero/Radio Button-->
+                        <div>
+                            <label>Zuzentzeko era:</label>
+                            <label for="jauna">Jauna</label>
+                            <input type="radio" id="jauna" name="genero" value="Jauna" onclick="irudiaAldatu()">
+                            <label for="jauna">Anderea</label>
+                            <input type="radio" id="anderea" name="genero" value="Anderea" onclick="irudiaAldatu()">
+                        </div>
+
+                        <!--<br><br>-->
+                        <!--Izena-->
+                        <div class="formularioa">
+                            <label for="izena">Izena:</label>
+                            <input type="text" id="izena" name="izena" required>
+                        </div>
+
+ 
+                        <!--Abizena-->
+                        <div class="formularioa">
+                            <label for="abizena">Abizena:</label>
+                            <input type="text" id="abizena" name="abizena" required>
+                        </div>
+  
+                        <!--Helbidea-->
+                        <div class="formularioa">
+                            <label for="helbidea">Helbidea:</label>
+                            <input type="text" id="helbidea" name="helbidea" required>
+                        </div>
+
+       
+                        <!--Hiria-->
+                        <div class="formularioa">
+                            <label for="hiria">Hiria:</label>
+                            <select name="hiria" id="hiria" required>
+                                <option selected="selected" disabled="disabled">Aukeratu</option>
+                                <option value="Mendaro">Mendaro</option>
+                                <option value="Eibar">Eibar</option>
+                            </select>
+                        </div>
+
+     
+                        <!--Genero/Checkbox-->
+                        <div class="formularioa">
+                            <label>Gustokoena:</label>
+                            <label for="liburuak">Liburuak</label>
+                            <input type="checkbox" id="liburuak" name="liburuak" value="Liburuak">
+                            <label for="pelikulak">Pelikulak</label>
+                            <input type="checkbox" id="pelikulak" name="pelikulak" value="Pelikulak">
+                        </div>
+
+                        <!--Botoiak-->
+                        <div class="formularioa">
+                            <button type="submit" id="bidali">Bidali</button>
+                            <button type="button" id="ezeztatu" onclick="formReseteatu()">Ezeztatu</button>
+                        </div>
+                    </form>
+                </div>
+                    
+                <div class=""><!--Irudia eta emaitza-->
+                    <div class="border emaitza">
+                        <img src="img/caraHombre.jpg" id="irudia">
+                    </div>
+
+                    <div class="border emaitza">
+                        <h4>Sartu dituzun datuak:</h4>
+                        <div>
+                            <p id="izenaEm"></p>
+                            <p id="abizenaEm"></p>
+                            <p id="helbideaEm"></p>
+                            <p id="hiriaEm"></p>
+                            <p id="gustokoenakEm"></p>
+                            <p id="liburuakEm"></p>
+                            <p id="pelikulakEm"></p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+             formBidali()
+        </script>
+    </body>
+</html>

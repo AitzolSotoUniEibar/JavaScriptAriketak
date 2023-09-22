@@ -1,0 +1,30 @@
+.main{
+    margin: auto;
+    width: 50%;
+    border-style: solid;
+}
+
+.block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.border{
+    border-style: solid;
+}
+
+.formularioa{
+    margin-top: 5%;
+}
+
+.emaitza{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
