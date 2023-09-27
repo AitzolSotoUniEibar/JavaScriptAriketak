@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Formularioa</title>
+        <link rel="stylesheet" href="ariketa.css">
+        <script type="text/javascript" src="Argazkiak.js"></script>
+    </head>
+    <body>
+        <div>
+            <input type="button" id="irudia" value="Egin klik hemen irudi berria agertzeko"><br>
+        </div>
+
+        <script>
+             var index = 0
+             var irudiak = argazkiak_array_init()
+
+             function irudiaEzabatu(irudia) {
+                document.body.removeChild(irudia)
+             }
+
+             document.getElementById("irudia").onclick = function(){
+                if(index < irudiak.length){
+                    var irudia = document.createElement('img')
+                    irudia.src = irudiak[index].src
+                    document.body.appendChild(irudia)
+                    irudia.addEventListener('dblclick',function(){irudiaEzabatu(irudia)},false)
+                    index++
+                }else if(index >= irudiak.length){
+                    alert("Ezin dira irudi gehiago gehitu")
+                }
+             }
+        </script>
+    </body>
+</html>
