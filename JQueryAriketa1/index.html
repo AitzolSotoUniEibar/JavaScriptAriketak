@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Formularioa</title>
+        <link rel="stylesheet" href="ariketa.css">
+        <script type="text/javascript" src="Ariketa1.js"></script>
+    </head>
+    <body>
+        <!--Hide eta show-->
+        <p id="parrafoa">If you click on the "Hide" button, I will disappear.</p>
+        <button id="hide">Hide</button>
+        <button id="show">Show</button>
+        <!--Toggle-->
+        <br><br>
+        <p id="parrafoa2">Toggle probatzen</p>
+        <button id="toggle">Toggle</button>
+        <!--Fade in eta out-->
+        <br><br>
+        <button id="fadeIn">Koloreak erakutsi</button>
+        <button id="fadeOut">Koloreak ezkutatu</button>
+        <button id="fadeToggle">Koloreak erakutsi/ezkutatu</button><br><br>
+        <div id="div1" style="width:80px;height:80px;display:none;background-color:red;"></div><br>
+        <div id="div2" style="width:80px;height:80px;display:none;background-color:green;"></div><br>
+        <div id="div3" style="width:80px;height:80px;display:none;background-color:blue;"></div>
+
+        <!--Flip-->
+        <div id="flip">Slide down egin</div>
+        <div id="panel">Kaixo mundua!</div>
+
+        <br><br>
+        <div id="flip2">Slide up egin</div>
+        <div id="panel2">Kaixo mundua!</div>
+
+        <br><br>
+        <div id="flip3">Slide down edo up egin</div>
+        <div id="panel3">Kaixo mundua!</div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#hide").click(function(){
+                    $("#parrafoa").hide();
+                });
+                $("#show").click(function(){
+                    $("#parrafoa").show();
+                })
+                $("#toggle").click(function(){
+                    $("#parrafoa2").toggle()
+                })
+                $("#fadeIn").click(function(){
+                    $("#div1").fadeIn();
+                    $("#div2").fadeIn("slow");
+                    $("#div3").fadeIn("3000");
+                })
+                $("#fadeOut").click(function(){
+                    $("#div1").fadeOut();
+                    $("#div2").fadeOut("slow");
+                    $("#div3").fadeOut("3000");
+                })
+                $("#fadeToggle").click(function(){
+                    $("#div1").fadeToggle();
+                    $("#div2").fadeToggle("slow");
+                    $("#div3").fadeToggle("3000");
+                })
+
+                $("#flip").click(function(){
+                    $("#panel").slideDown("slow");
+                });
+
+                $("#flip2").click(function(){
+                    $("#panel2").slideUp("slow");
+                });
+
+                $("#flip3").click(function(){
+                    $("#panel3").slideToggle("slow");
+                });
+            })
+        </script>
+    </body>
+</html>

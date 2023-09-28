@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Formularioa</title>
+        <link rel="stylesheet" href="ariketa.css">
+        <script type="text/javascript" src="Ariketa1.js"></script>
+    </head>
+    <body>
+        <div>
+            <span style="outline:1px solid black" id="capa0">Capa donde cambiaremos la propiedad outlineWidth</span><br><br>
+            <input type="button" id="boton0" value="Cambiar a 15px el grosor del borde exterior del elemento">
+            <br>
+            <br>
+            <span style="border:1px solid black" id="capa1">Capa donde cambiaremos la propiedad borderWidth</span><br><br>
+            <input type="button" id="boton1" value="Cambiar a 10px el grosor del borde del elemento en 3 segundos">
+            <br>
+            <br>
+            <span style="border:1px solid black" id="capa2">Capa donde cambiaremos la propiedad borderBottomWidth</span><br><br>
+            <input type="button" id="boton2" value="Cambiar a 20px el grosor del borde inferior del elemento en 5 segundos y callback">
+            <br>
+            <br>
+            <span style="border:1px solid black" id="capa3">Capa donde cambiaremos la propiedad borderTopWidth</span><br><br>
+            <input type="button" id="boton3" value="Cambiar a 15px el grosor del borde superior del elemento y callback">
+            <br>
+            <br>
+            <span style="border:1px solid black" id="capa4">Capa donde cambiaremos la propiedad borderLeftWidth y borderRightWidth</span><br><br>
+            <input type="button" id="boton4" value="Cambiar a 10px el grosor del borde izquierdo y a 20px el derecho">
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#boton0").click(function(){
+                $("#capa0").animate({outlineWidth:"15px"});
+            });
+            $("#boton1").click(function(){
+                $("#capa1").animate({borderWidth:"10px"},3000);
+            });
+            $("#boton2").click(function(){
+                $("#capa2").animate({borderBottomWidth:"20px"},5000,function() {alert ('Efecto terminado!');});
+            });
+            $("#boton3").click(function(){
+                $("#capa3").animate({borderTopWidth:"15px"},function() {alert ('Efecto terminado!');});
+            });
+            $("#boton4").click(function(){
+                $("#capa4").animate({borderLeftWidth:"10px", borderRightWidth:"20px"});
+            });
+            })
+        </script>
+    </body>
+</html>

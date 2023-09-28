@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Formularioa</title>
+        <link rel="stylesheet" href="ariketa.css">
+        <script type="text/javascript" src="Ariketa1.js"></script>
+    </head>
+    <body>
+        <div>
+            <div>
+                <h2>Saskia egiteko aplikazioa.Idatzi zure erosketak</h2>
+                <label for="saskia">Saskira gehitzekoa:</label>
+                <input type="text" id="saskia">
+            </div>
+            <div class="botoiak">
+                <button type="button" id="gehitu">Gehitu</button>
+                <button type="button" id="erosi">Erosketa egin</button>
+            </div>
+            <div>
+                <ul id="erosketak">
+
+                </ul>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#gehitu").on('click',function(){
+                    if($("#saskia:text").val().length > 0){
+                        $("#erosketak").append($("<li>"+ $("#saskia:text").val() +"</li>"))
+                        $("#saskia").val('')
+                    }else{
+                        alert("Ez da produkturik gehitu")
+                    }
+                })
+
+                $("#erosi").on('click',function(){
+                    if($('#erosketak li').length >= 1){
+                        $("#erosketak").css('background-color','green')
+                        $("#erosketak").css('border','3px solid black')
+                        $('#erosketak li').each(function(){
+                            el = $(this)
+                            el.css('color','white')
+                        })
+                        alert("Zure erosketa prest dago")
+                    }else{
+                        alert("Ez dago produkturik karritoan")
+                    }
+                })
+            })
+        </script>
+    </body>
+</html>
