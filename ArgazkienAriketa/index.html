@@ -13,22 +13,28 @@
         </div>
 
         <script>
-             var index = 0
              var irudiak = argazkiak_array_init()
-
-             function irudiaEzabatu(irudia) {
+             var active = [false,false,false,false]
+             function irudiaEzabatu(irudia,index) {
                 document.body.removeChild(irudia)
+                active[index] = false
              }
 
+
              document.getElementById("irudia").onclick = function(){
-                if(index < irudiak.length){
-                    var irudia = document.createElement('img')
-                    irudia.src = irudiak[index].src
-                    document.body.appendChild(irudia)
-                    irudia.addEventListener('dblclick',function(){irudiaEzabatu(irudia)},false)
-                    index++
-                }else if(index >= irudiak.length){
-                    alert("Ezin dira irudi gehiago gehitu")
+                for(let i = 0;i <= active.length;i++){
+                    if(i == active.length){
+                        alert("Ezin dira irudi gehiago gehitu")
+                        return
+                    }
+                    if(active[i] == false){
+                        var irudia = document.createElement('img')
+                        irudia.src = irudiak[i].src
+                        document.body.appendChild(irudia)
+                        irudia.addEventListener('dblclick',function(){irudiaEzabatu(irudia,i)},false)
+                        active[i] = true
+                        return
+                    }
                 }
              }
         </script>
