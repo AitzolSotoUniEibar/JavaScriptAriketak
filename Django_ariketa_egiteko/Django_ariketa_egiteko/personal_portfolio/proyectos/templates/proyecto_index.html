@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+<h1>Proyectos</h1>
+<div class="row">
+    {% for proyecto in proyectos %}
+    <div class="col-md-4">
+        <div class="card mb-2">
+            <img class="card-img-top" src="{% static proyecto.imagen %}">
+            <div class="card-body">
+                <h5 class="card-title">{{ proyecto.titulo }}</h5>
+                <p class="card-text">{{ proyecto.descripcion }}</p>
+                <p class="card-text">Teknologia: <span id="{{ proyecto.id }}">{{ proyecto.tecnologia }}</span></p>
+                <p class="card-text">Nahi duzu teknologia aldatu?</p>
+                <form>
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ proyecto.id }}" />
+                    <input type="text" name="tecnologia" />
+                    <input type="submit" value="Aldatu" />
+                </form>
+                <br>
+                <a href="{% url 'proyecto_detail' proyecto.pk %}" class="btn btn-primary">
+                    Read More
+                </a>
+                <div>
+                    <p>Galderak ikusi nahi dituzu?</p>
+                    <p>Nahi dituzu galderak ikusi? Egin klik <a name="galderak" id="{{ proyecto.pk }}" href="#" class="btn btn-primary show-questions">hemen</a></p>
+                    <div id="preguntas-{{ proyecto.pk }}" class="preguntas" style="display: none;">
+                        <!-- Aquí se mostrarán las preguntas -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock page_content%}
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(document).on('submit', 'form', function (e) {
+            e.preventDefault();
+            datuak = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'post_teknologia' %}",
+                data: datuak,
+                success: function (response) {
+                    nodoa = "#" + response.id;
+                    $(nodoa).html(response.tecnologia);
+                },
+                error: function (response) {
+                    alert("Ezin da aldatu. Saiatu beranduago" + response);
+                }
+            })
+        })
+
+        $("[name='galderak']").on('click', function () {
+            var proyectoId = $(this).attr('id');
+            var preguntasDiv = $("#preguntas-" + proyectoId);
+            if (preguntasDiv.is(":hidden")) {
+                // Realiza una solicitud AJAX para obtener las preguntas
+                $.ajax({
+                    type: 'GET',
+                    url: "{% url 'obtener_preguntas' %}?proyecto_id=" + proyectoId,
+                    success: function (response) {
+                        // Limpia el contenido anterior del div de preguntas
+                        preguntasDiv.empty();
+
+                        // Extrae la lista de preguntas del JSON
+                        var galderak = response.galderak;
+
+                        // Verifica si hay alguna pregunta
+                        if (galderak.length > 0) {
+                            // Crea una lista desordenada (ul) para mostrar las preguntas
+                            var ul = document.createElement("ul");
+
+                            // Itera sobre las preguntas y crea elementos de lista (li)
+                            galderak.forEach(function (galdera) {
+                                var li = document.createElement("li");
+                                li.textContent = galdera;
+                                ul.appendChild(li);
+                            });
+
+                            // Agrega la lista al div de preguntas
+                            preguntasDiv.append(ul);
+                        } else {
+                            // Si no hay preguntas, muestra un mensaje
+                            preguntasDiv.text("No hay preguntas disponibles.");
+                        }
+
+                        // Muestra el div de preguntas
+                        preguntasDiv.show();
+                    },
+                    error: function (response) {
+                        alert("Error al obtener preguntas: " + response);
+                    }
+                });
+            } else {
+                preguntasDiv.hide();
+            }
+        })
+    })
+
+</script>
+{% endblock javascript %}

@@ -1,0 +1,16 @@
+body{
+    background-image: url("img/spacestars.jpg");
+}
+
+.izenburua{
+    color: azure;
+}
+
+.irudia{
+    position: relative;
+    left: 50%;
+    top: 0;
+}
+
+
+
