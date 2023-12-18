@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Klubak
+      Tab 1
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,7 +9,8 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Klubak</ion-title>
+      <ion-title size="large">Kluba</ion-title>
+      <ion-progress-bar type="indeterminate" *ngIf="showLoader"></ion-progress-bar>
     </ion-toolbar>
   </ion-header>
 
@@ -33,7 +34,7 @@
               </ion-button>
             </ion-col>
             <ion-col size="6">
-              <!--<ion-img [attr.src]="kluba.cover_photo_small == null ? '../../assets/img/generikoa.jpg' : kluba.cover_photo_small "></ion-img>-->
+              <ion-img [attr.src]="kluba.cover_photo_small == null ? '../../assets/img/generikoa.jpg' : kluba.cover_photo_small "></ion-img>
             </ion-col>
           </ion-row>
         </ion-item-divider>
@@ -41,5 +42,15 @@
     </ion-row>
     </ion-grid>
 
-  <app-explore-container name="Klubak"></app-explore-container>
+    <ion-button color="primary" [routerLink]="['kluba', 'kluba.id']">
+      <ion-icon name="information-circle-outline"></ion-icon>Jarduerak ikusi
+    </ion-button>
+
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+      <ion-fab-button color="success" [routerLink]="['/kluba-gehitu']">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+  
 </ion-content>
