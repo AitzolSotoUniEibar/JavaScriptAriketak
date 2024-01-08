@@ -54,33 +54,34 @@ export class ApiService {
   }  
 
   // Kluben zerrenda prestatu, konstruktoreetik deitzen zaio
-  async getKlubak(){
+  async getKlubak() {
     try {
       const res = await this.storage.executeSql('SELECT * FROM klubas', []);
       let items: Kluba[] = [];
       console.log(res);
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) {
-          //jarduerak lortzen dira -> getJarduerak(id)
-          const jarduerak = await this.getJarduerak(res.rows.item(i).id);       
-          items.push({ 
+          // jarduerak lortzen dira -> getJarduerak(id)
+          const jarduerak = await this.getJarduerak(res.rows.item(i).id) || []; // Use empty array if undefined
+          items.push({
             id: res.rows.item(i).id,
-            name: res.rows.item(i).name,  
+            name: res.rows.item(i).name,
             cover_photo_small: res.rows.item(i).cover_photo_small,
             sport_type: res.rows.item(i).sport_type,
-            privatea: res.rows.item(i).privatea,
+            private: res.rows.item(i).privatea,
             member_count: res.rows.item(i).member_count,
             description: res.rows.item(i).description,
             club_type: res.rows.item(i).club_type,
-            jarduerak: jarduerak
-           });
+            jarduerak: jarduerak,
+          });
         }
       }
       this.klubakList.next(items);
     } catch (error) {
-      console.error ("errorea getKlubak", error);
+      console.error('errorea getKlubak', error);
     }
   }
+  
   
   
  // Klub bateko jarduerak lortzeko
@@ -103,6 +104,9 @@ export class ApiService {
       }
       return items;
     }
+    else{
+      return [];
+    }
   } catch (error) {
     console.error("errorea getJarduerak", error);
     return [];
@@ -114,14 +118,14 @@ export class ApiService {
   }
 
   //getKluba() lortutako datuak bueltatzen ditu, tab1-jarduerak orrian erabiltzen da
-  fetchKluba(id: any): Observable<Kluba> {
+  fetchKluba(id: any): Observable<Kluba| undefined> {
     const kluba = this.klubakList.value.find(kluba => kluba.id === id);
     return of(kluba);
   }
 
   // Add - Lerro berria gehitu, transakzio taulara pasatu eta sinkronizatzen saiatu
   async addKluba(kluba: Kluba) {
-    let data = [kluba.name, kluba.cover_photo_small, kluba.sport_type, kluba.privatea, kluba.member_count, kluba.description, kluba.club_type];
+    let data = [kluba.name, kluba.cover_photo_small, kluba.sport_type, kluba.private, kluba.member_count, kluba.description, kluba.club_type];
     alert(data);
     const res = await this.storage.executeSql('INSERT INTO klubas (name, cover_photo_small, sport_type, private, member_count, description, club_type) VALUES (?, ?, ?, ?, ?, ?, ?)', data);
 

@@ -30,17 +30,26 @@ export class Tab1JarduerakPage implements OnInit {
   }*/
   getKluba(): void {
     this.apiService.dbState().subscribe((res) => {
-      if(res){
-            const id = Number(this.route.snapshot.paramMap.get('id'));
-            this.apiService.fetchKluba(id).subscribe(kluba => {
+      if (res) {
+        const id = Number(this.route.snapshot.paramMap.get('id'));
+        this.apiService.fetchKluba(id).subscribe(
+          (kluba) => {
+            if (kluba) {
               this.kluba = kluba;
-              this.kluba.jarduerak.sort( (a, b): number => {
-              return (b.moving_time - a.moving_time);
+              this.kluba.jarduerak.sort((a, b): number => {
+                return b.moving_time - a.moving_time;
               });
+            } else {
+              console.error(`Kluba with id ${id} not found.`);
+              // Handle the case where the Kluba is not found
             }
-        )}
+          },
+          (error) => console.error('Error fetching Kluba:', error)
+        );
+      }
     });
-   }
+  }
+  
   
   
    goBack(): void {
