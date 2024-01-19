@@ -4,6 +4,7 @@ import { Location} from '@angular/common';
 import { KlubaService } from '../services/kluba.service';
 import { Kluba } from '../classes/kluba';
 import { ApiService } from '../services/api.service';
+import { Jarduera } from '../classes/jarduera';
 
 @Component({
   selector: 'app-tab1-jarduerak',
@@ -17,7 +18,8 @@ export class Tab1JarduerakPage implements OnInit {
 
   constructor(private klubaService: KlubaService, private route: ActivatedRoute, private location: Location) { }
 
-  /*getKluba(): void {
+  /*
+  getKluba(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.klubaService.getKluba(id)
     .subscribe(kluba => {
@@ -28,33 +30,27 @@ export class Tab1JarduerakPage implements OnInit {
     },
     error => console.log('Error :: ' + error));
   }*/
+  //sqlite
+   
+  
   getKluba(): void {
     this.apiService.dbState().subscribe((res) => {
-      if (res) {
-        const id = Number(this.route.snapshot.paramMap.get('id'));
-        this.apiService.fetchKluba(id).subscribe(
-          (kluba) => {
-            if (kluba) {
+      if(res){
+            const id = Number(this.route.snapshot.paramMap.get('id'));
+            this.apiService.fetchKluba(id).subscribe(kluba => {
               this.kluba = kluba;
-              this.kluba.jarduerak.sort((a, b): number => {
-                return b.moving_time - a.moving_time;
+              this.kluba.jarduerak.sort( (a, b): number => {
+              return (b.moving_time - a.moving_time);
               });
-            } else {
-              console.error(`Kluba with id ${id} not found.`);
-              // Handle the case where the Kluba is not found
             }
-          },
-          (error) => console.error('Error fetching Kluba:', error)
-        );
-      }
+        )}
     });
-  }
-  
+   }
   
   
    goBack(): void {
     this.location.back();
-   }
+  }
   ngOnInit() {
     this.getKluba();
   }
